@@ -182,11 +182,11 @@
 <body>
 <main>
   <div class="logo-container">
-    <img src="logo-agir-mieux-vivre-2026.jpg" alt="Logo Agir et Mieux Vivre 2026" class="logo" />
+    <img src="logo-agir-mieux-vivre-2026.jpg" alt="Logo #Agir et Mieux Vivre 2026" class="logo" />
   </div>
 
   <h1>Comité de soutien</h1>
-  <p class="subtitle">Liste Agir et Mieux Vivre 2026 – Élections municipales de mars 2026</p>
+  <p class="subtitle">Liste #Agir et Mieux Vivre 2026 – Élections municipales de mars 2026</p>
 
   <form id="support-form">
     <fieldset>
@@ -267,9 +267,8 @@
 <script>
   // ⚙️ CONFIG — À REMPLACER
   const SUPABASE_URL = "https://exmljofhkewtvuxhfqli.supabase.co";     // ← Ton URL Supabase
-  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4bWxqb2Zoa2V3dHZ1eGhmcWxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwMTAxOTEsImV4cCI6MjA3OTU4NjE5MX0.ObewQvyOLN93678urd1g2-FdgyHP8UkQ6L2iBsZEKeM";                        // ← Clé anon publique
-  const FUNCTION_URL = "https://exmljofhkewtvuxhfqli.supabase.co/functions/v1/support-notify";
-
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4bWxqb2Zoa2V3dHZ1eGhmcWxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwMTAxOTEsImV4cCI6MjA3OTU4NjE5MX0.ObewQvyOLN93678urd1g2-FdgyHP8UkQ6L2iBsZEKeM";                        // ← Clé anon publique// ← ta clé anon publique
+  
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   const form = document.getElementById("support-form");
@@ -307,15 +306,14 @@
         return;
       }
 
-      // 2) Appel de la fonction d'envoi d'email
-      const res = await fetch(FUNCTION_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      // 2) Appel de la fonction d'envoi d'email via Supabase Functions
+      const { data: fnData, error: fnError } = await supabase.functions.invoke(
+        "support-notify",
+        { body: payload }
+      );
 
-      if (!res.ok) {
-        console.error("Email error", await res.text());
+      if (fnError) {
+        console.error("Email function error", fnError);
         statusEl.textContent =
           "⚠️ Soutien enregistré, mais l’e-mail de notification n’a pas pu être envoyé.";
         statusEl.className = "error";
