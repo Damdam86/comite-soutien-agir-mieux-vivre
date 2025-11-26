@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Comité de soutien – #Agir et Mieux Vivre 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --blue-dark: #244a9b;
+      --purple: #7b2d8a;
+      --blue-light: #43b0e8;
+      --bg-light: #f5f7fb;
+      --text-main: #222;
+      --border-radius: 18px;
+      --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #f5f7fb, #e7edf9);
+      color: var(--text-main);
+    }
+
+    main {
+      max-width: 600px;
+      margin: 32px auto 48px;
+      padding: 24px 20px 40px;
+      background: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .logo {
+      width: 140px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin: 8px 0 4px;
+      color: var(--blue-dark);
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 24px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    fieldset {
+      border: 1px solid #dde3f1;
+      border-radius: 12px;
+      padding: 14px 14px 10px;
+      background: var(--bg-light);
+    }
+
+    legend {
+      padding: 0 8px;
+      font-weight: 600;
+      color: var(--purple);
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      margin-top: 4px;
+      border-radius: 8px;
+      border: 1px solid #c9d3ee;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .checkbox-row label {
+      font-weight: 400;
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    button[type="submit"] {
+      margin-top: 12px;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--blue-dark), var(--purple));
+      color: #fff;
+      box-shadow: 0 6px 14px rgba(36, 74, 155, 0.35);
+      transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(36, 74, 155, 0.45);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(36, 74, 155, 0.35);
+    }
+
+    #status {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    #status.error {
+      color: #b00020;
+    }
+
+    #status.success {
+      color: #1b7e38;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        margin: 16px;
+        padding: 20px 16px 28px;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <div class="logo-container">
+    <img src="logo-agir-mieux-vivre-2026.png" alt="Logo #Agir et Mieux Vivre 2026" class="logo" />
+  </div>
+
+  <h1>Comité de soutien</h1>
+  <p class="subtitle">Liste #Agir et Mieux Vivre 2026 – Élections municipales de mars 2026</p>
+
+  <form id="support-form">
+    <fieldset>
+      <legend>Identité</legend>
+      <div>
+        <label for="last_name">Nom *</label><br />
+        <input type="text" id="last_name" name="last_name" required />
+      </div>
+      <div style="margin-top: 8px;">
+        <label for="first_name">Prénom *</label><br />
+        <input type="text" id="first_name" name="first_name" required />
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Coordonnées</legend>
+      <div>
+        <label for="address">Adresse complète *</label><br />
+        <textarea id="address" name="address" rows="2" required></textarea>
+      </div>
+      <div style="margin-top: 8px;">
+        <label for="phone">Téléphone *</label><br />
+        <input type="tel" id="phone" name="phone" required />
+      </div>
+      <div style="margin-top: 8px;">
+        <label for="email">Courriel *</label><br />
+        <input type="email" id="email" name="email" required />
+      </div>
+      <p class="hint">Ces informations restent internes à l’équipe de campagne.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Engagement</legend>
+      <p>
+        Je, soussigné(e), souhaite participer au Comité de soutien de la liste
+        <strong>#Agir et Mieux Vivre 2026</strong> pour les élections municipales de 2026.
+      </p>
+      <div class="checkbox-row">
+        <input type="checkbox" id="public_name" name="public_name" value="yes" required />
+        <label for="public_name">
+          Par ma signature, j'accepte de figurer sur la liste des membres du comité de soutien.
+          Seul mon nom y sera mentionné.
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Signature électronique</legend>
+      <p>En saisissant votre nom ci-dessous, vous validez votre engagement et votre identité.</p>
+      <div>
+        <label for="signature">Signature (Nom / Prénom) *</label><br />
+        <input type="text" id="signature" name="signature" required />
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Mentions RGPD</legend>
+      <p>
+        Les informations recueillies sont nécessaires à la gestion du comité de soutien de la liste
+        <strong>#Agir et Mieux Vivre 2026</strong>. Conformément au RGPD, vous pouvez exercer vos droits
+        (accès, rectification, suppression) en écrivant à
+        <strong>contact@agir-mieux-vivre.fr</strong> (exemple à adapter).
+      </p>
+      <div class="checkbox-row">
+        <input type="checkbox" id="rgpd_ok" name="rgpd_ok" value="yes" required />
+        <label for="rgpd_ok">J’accepte le traitement de mes données conformément au RGPD.</label>
+      </div>
+    </fieldset>
+
+    <button type="submit">Valider mon soutien</button>
+  </form>
+
+  <p id="status"></p>
+</main>
+
+<!-- Supabase JS -->
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+  // ⚙️ CONFIG — À REMPLACER
+  const SUPABASE_URL = "https://TON-PROJECT-REF.supabase.co";     // ← Ton URL Supabase
+  const SUPABASE_ANON_KEY = "TA_ANON_KEY";                        // ← Clé anon publique
+  const FUNCTION_URL = "https://TON-PROJECT-REF.functions.supabase.co/support-notify";
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const form = document.getElementById("support-form");
+  const statusEl = document.getElementById("status");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    statusEl.textContent = "Enregistrement...";
+    statusEl.className = "";
+
+    const formData = new FormData(form);
+
+    const payload = {
+      last_name: formData.get("last_name"),
+      first_name: formData.get("first_name"),
+      address: formData.get("address"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      public_name: formData.get("public_name") === "yes",
+      signature: formData.get("signature"),
+    };
+
+    try {
+      // 1) Insertion dans Supabase
+      const { error } = await supabase
+        .from("support_committee_members")
+        .insert(payload);
+
+      if (error) {
+        console.error(error);
+        statusEl.textContent =
+          "❌ Erreur lors de l’enregistrement. Merci de réessayer.";
+        statusEl.className = "error";
+        return;
+      }
+
+      // 2) Appel de la fonction d'envoi d'email
+      const res = await fetch(FUNCTION_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        console.error("Email error", await res.text());
+        statusEl.textContent =
+          "⚠️ Soutien enregistré, mais l’e-mail de notification n’a pas pu être envoyé.";
+        statusEl.className = "error";
+        form.reset();
+        return;
+      }
+
+      statusEl.textContent = "🎉 Merci ! Votre soutien a bien été enregistré.";
+      statusEl.className = "success";
+      form.reset();
+    } catch (e) {
+      console.error(e);
+      statusEl.textContent =
+        "❌ Erreur inattendue. Merci de réessayer un peu plus tard.";
+      statusEl.className = "error";
+    }
+  });
+</script>
+
+</body>
+</html>
