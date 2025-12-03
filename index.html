@@ -127,6 +127,20 @@
       margin-top: 4px;
     }
 
+    /* Nouvelle grille pour CP + Ville */
+    .address-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 480px) {
+      .address-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
     button[type="submit"] {
       margin-top: 12px;
       width: 100%;
@@ -204,8 +218,18 @@
     <fieldset>
       <legend>Coordonnées</legend>
       <div>
-        <label for="address">Adresse complète *</label><br />
-        <textarea id="address" name="address" rows="2" required></textarea>
+        <label for="street_address">Adresse (n° et rue) *</label><br />
+        <input type="text" id="street_address" name="street_address" placeholder="Ex : 12 rue de la Mairie" required />
+      </div>
+      <div class="address-row">
+        <div>
+          <label for="postal_code">Code postal *</label><br />
+          <input type="text" id="postal_code" name="postal_code" placeholder="26800" maxlength="5" pattern="[0-9]{5}" required />
+        </div>
+        <div>
+          <label for="city">Ville *</label><br />
+          <input type="text" id="city" name="city" placeholder="Portes-lès-Valence" required />
+        </div>
       </div>
       <div style="margin-top: 8px;">
         <label for="phone">Téléphone *</label><br />
@@ -215,7 +239,7 @@
         <label for="email">Courriel *</label><br />
         <input type="email" id="email" name="email" required />
       </div>
-      <p class="hint">Ces informations restent internes à l’équipe de campagne.</p>
+      <p class="hint">Ces informations restent internes à l'équipe de campagne.</p>
     </fieldset>
 
     <fieldset>
@@ -252,7 +276,7 @@
       </p>
       <div class="checkbox-row">
         <input type="checkbox" id="rgpd_ok" name="rgpd_ok" value="yes" required />
-        <label for="rgpd_ok">J’accepte le traitement de mes données conformément au RGPD.</label>
+        <label for="rgpd_ok">J'accepte le traitement de mes données conformément au RGPD.</label>
       </div>
     </fieldset>
 
@@ -266,8 +290,8 @@
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script>
   // ⚙️ CONFIG — À REMPLACER
-  const SUPABASE_URL = "https://exmljofhkewtvuxhfqli.supabase.co";     // ← Ton URL Supabase
-  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4bWxqb2Zoa2V3dHZ1eGhmcWxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwMTAxOTEsImV4cCI6MjA3OTU4NjE5MX0.ObewQvyOLN93678urd1g2-FdgyHP8UkQ6L2iBsZEKeM";                        // ← Clé anon publique// ← ta clé anon publique
+  const SUPABASE_URL = "https://exmljofhkewtvuxhfqli.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4bWxqb2Zoa2V3dHZ1eGhmcWxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwMTAxOTEsImV4cCI6MjA3OTU4NjE5MX0.ObewQvyOLN93678urd1g2-FdgyHP8UkQ6L2iBsZEKeM";
   
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -285,7 +309,9 @@
     const payload = {
       last_name: formData.get("last_name"),
       first_name: formData.get("first_name"),
-      address: formData.get("address"),
+      street_address: formData.get("street_address"),
+      postal_code: formData.get("postal_code"),
+      city: formData.get("city"),
       phone: formData.get("phone"),
       email: formData.get("email"),
       public_name: formData.get("public_name") === "yes",
@@ -301,7 +327,7 @@
       if (error) {
         console.error(error);
         statusEl.textContent =
-          "❌ Erreur lors de l’enregistrement. Merci de réessayer.";
+          "❌ Erreur lors de l'enregistrement. Merci de réessayer.";
         statusEl.className = "error";
         return;
       }
@@ -315,7 +341,7 @@
       if (fnError) {
         console.error("Email function error", fnError);
         statusEl.textContent =
-          "⚠️ Soutien enregistré, mais l’e-mail de notification n’a pas pu être envoyé.";
+          "⚠️ Soutien enregistré, mais l'e-mail de notification n'a pas pu être envoyé.";
         statusEl.className = "error";
         form.reset();
         return;
